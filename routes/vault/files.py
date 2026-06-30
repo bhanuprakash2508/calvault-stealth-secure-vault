@@ -30,13 +30,16 @@ files_bp = Blueprint(
     __name__
 )
 
-# File Vault
+UPLOAD_FOLDER = "uploads"
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+MAX_FILE_SIZE = 5 * 1024 * 1024
+
 
 @files_bp.route("/file-vault")
 def file_vault():
 
     if not session.get("vault_access"):
-
         return redirect(
             url_for("calendar.home")
         )
@@ -61,7 +64,6 @@ def file_vault():
         pagination=files
     )
 
-# Upload File
 
 @files_bp.route(
     "/upload-file",
@@ -70,55 +72,63 @@ def file_vault():
 def upload_file():
 
     if not session.get("vault_access"):
-
         return redirect(
             url_for("calendar.home")
         )
 
     uploaded_file = request.files.get("file")
 
-    if uploaded_file:
-
-        original_filename = secure_filename(
-            uploaded_file.filename
+    if not uploaded_file:
+        return redirect(
+            url_for("files.file_vault")
         )
 
-        file_data = uploaded_file.read()
+    uploaded_file.seek(0, os.SEEK_END)
+    file_size = uploaded_file.tell()
+    uploaded_file.seek(0)
 
-        encrypted_data = encrypt_file(
-            file_data
-        )
+    if file_size > MAX_FILE_SIZE:
+        return "File too large. Maximum allowed size is 5MB.", 400
 
-        encrypted_filename = (
-            str(uuid.uuid4()) + ".enc"
-        )
+    original_filename = secure_filename(
+        uploaded_file.filename
+    )
 
-        filepath = os.path.join(
-            "uploads",
-            encrypted_filename
-        )
+    file_data = uploaded_file.read()
 
-        with open(filepath, "wb") as f:
-            f.write(encrypted_data)
+    encrypted_data = encrypt_file(
+        file_data
+    )
 
-        file_entry = VaultFile(
-            user_id=1,
-            original_filename=original_filename,
-            encrypted_filename=encrypted_filename
-        )
+    encrypted_filename = (
+        str(uuid.uuid4()) + ".enc"
+    )
 
-        db.session.add(file_entry)
-        db.session.commit()
+    filepath = os.path.join(
+        UPLOAD_FOLDER,
+        encrypted_filename
+    )
 
-        log_activity(
-            f"📁 File Uploaded → {original_filename}"
-        )
+    with open(filepath, "wb") as f:
+        f.write(encrypted_data)
+
+    file_entry = VaultFile(
+        user_id=1,
+        original_filename=original_filename,
+        encrypted_filename=encrypted_filename
+    )
+
+    db.session.add(file_entry)
+    db.session.commit()
+
+    log_activity(
+        f"📁 File Uploaded → {original_filename}"
+    )
 
     return redirect(
         url_for("files.file_vault")
     )
 
-# Download File
 
 @files_bp.route(
     "/download-file/<int:id>"
@@ -126,7 +136,6 @@ def upload_file():
 def download_file(id):
 
     if not session.get("vault_access"):
-
         return redirect(
             url_for("calendar.home")
         )
@@ -136,19 +145,16 @@ def download_file(id):
     ).first()
 
     if not file:
-
         return redirect(
             url_for("files.file_vault")
         )
 
     filepath = os.path.join(
-        "uploads",
+        UPLOAD_FOLDER,
         file.encrypted_filename
     )
 
-    # FIX ADDED
     if not os.path.exists(filepath):
-
         return redirect(
             url_for("files.file_vault")
         )
@@ -166,7 +172,6 @@ def download_file(id):
         download_name=file.original_filename
     )
 
-# Delete File
 
 @files_bp.route(
     "/delete-file/<int:id>",
@@ -175,7 +180,6 @@ def download_file(id):
 def delete_file(id):
 
     if not session.get("vault_access"):
-
         return redirect(
             url_for("calendar.home")
         )
@@ -187,12 +191,11 @@ def delete_file(id):
     if file:
 
         filepath = os.path.join(
-            "uploads",
+            UPLOAD_FOLDER,
             file.encrypted_filename
         )
 
         if os.path.exists(filepath):
-
             os.remove(filepath)
 
         db.session.delete(file)
@@ -206,7 +209,6 @@ def delete_file(id):
         url_for("files.file_vault")
     )
 
-# Preview File
 
 @files_bp.route(
     "/preview-file/<int:id>"
@@ -214,7 +216,6 @@ def delete_file(id):
 def preview_file(id):
 
     if not session.get("vault_access"):
-
         return redirect(
             url_for("calendar.home")
         )
@@ -224,19 +225,16 @@ def preview_file(id):
     ).first()
 
     if not file:
-
         return redirect(
             url_for("files.file_vault")
         )
 
     filepath = os.path.join(
-        "uploads",
+        UPLOAD_FOLDER,
         file.encrypted_filename
     )
 
-    # FIX ADDED
     if not os.path.exists(filepath):
-
         return redirect(
             url_for("files.file_vault")
         )
@@ -255,7 +253,6 @@ def preview_file(id):
     mime_type = "application/octet-stream"
 
     if extension == "pdf":
-
         mime_type = "application/pdf"
 
     elif extension in [
@@ -263,11 +260,9 @@ def preview_file(id):
         "jpg",
         "jpeg"
     ]:
-
         mime_type = f"image/{extension}"
 
     elif extension == "txt":
-
         mime_type = "text/plain"
 
     return send_file(
