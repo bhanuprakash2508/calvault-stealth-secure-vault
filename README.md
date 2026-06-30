@@ -1,9 +1,15 @@
 # 🔐 CalVault — Stealth Based Secure Vault System
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue)
-![Flask](https://img.shields.io/badge/Flask-WebApp-black)
+![Flask](https://img.shields.io/badge/Framework-Flask-black)
 ![SQLite](https://img.shields.io/badge/Database-SQLite-green)
+![Encryption](https://img.shields.io/badge/Encryption-Fernet-orange)
 ![Security](https://img.shields.io/badge/Focus-Cybersecurity-red)
+![Authentication](https://img.shields.io/badge/Auth-Hidden%20Pattern-purple)
+![Recovery](https://img.shields.io/badge/Recovery-Key%20System-yellow)
+![Privacy](https://img.shields.io/badge/Privacy-First-success)
+![Architecture](https://img.shields.io/badge/Architecture-Modular-blue)
+![Status](https://img.shields.io/badge/Project-Completed-brightgreen)
 
 <img src="screenshots/calendar_planner.png" width="900">
 
