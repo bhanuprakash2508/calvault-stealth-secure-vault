@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+        Change Pattern
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+          'static',
+          filename='css/style.css'
+    ) }}">
+
+</head>
+
+<body>
+
+<div class="setup-container">
+
+    <h1>
+
+        Change Pattern
+
+    </h1>
+
+    <p>
+
+        Select new secret unlock sequence
+
+    </p>
+
+    <form method="POST">
+
+        <div class="calendar-grid">
+
+            {% for i in range(1,31) %}
+
+                <div
+                    class="day-box"
+                    data-day="{{ i }}"
+                    onclick="toggleDate(this)"
+                >
+
+                    {{ i }}
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+        <p
+            id="selectedText"
+            class="selected-pattern"
+        >
+
+            Selected: None
+
+        </p>
+
+        <input
+            type="hidden"
+            name="calendar_pattern"
+            id="calendarPattern"
+        >
+
+        <div class="button-group">
+
+            <button id="updateBtn">
+
+                Update Pattern
+
+            </button>
+
+            <button
+                type="button"
+                class="cancel-btn"
+                onclick="location.href='/settings'"
+            >
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+<script src="{{ url_for(
+
+    'static',
+
+    filename='js/setup.js'
+) }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title> CalVault Planner </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/style.css'
+        ) }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css"
+    >
+
+</head>
+
+<body>
+
+    <div class="app-layout">
+
+        <!-- Sidebar -->
+
+        <div class="sidebar">
+
+            <div class="logo-section">
+
+                <h2>CalVault</h2>
+
+                <p>Secure Planner</p>
+
+            </div>
+
+            <button class="create-btn">+ Create Event</button>
+
+            <!-- Search -->
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="searchEvents"
+                    placeholder="Search events..."
+                >
+
+            </div>
+
+            <!-- Categories -->
+
+            <div class="sidebar-section">
+
+                <h4>Categories</h4>
+
+                <div
+                    class="category all-cat"
+                    onclick="filterEvents('all')"
+                >
+                    ● All
+
+                </div>
+
+                <div
+                    class="category event-cat"
+                    onclick="filterEvents('event')"
+                >
+                    ● Events
+
+                </div>
+
+                <div
+                    class="category note-cat"
+                    onclick="filterEvents('note')"
+                >
+                    ● Notes
+
+                </div>
+
+                <div
+                    class="category reminder-cat"
+                    onclick="filterEvents('reminder')"
+                >
+                    ● Reminders
+
+                </div>
+
+                <div
+                    class="category deadline-cat"
+                    onclick="filterEvents('deadline')"
+                >
+                    ● Deadlines
+
+                </div>
+
+            </div>
+
+            <!-- Today Card -->
+
+            <div class="today-card">
+
+                <h4>Today</h4>
+
+                <p id="todayDate">26 June 2026</p>
+
+            </div>
+
+        </div>
+
+        <!-- Main Content -->
+
+        <div class="main-content">
+
+            <div class="planner-header">
+
+                <h1 id="plannerTitle">
+
+                    My Schedule
+
+                </h1>
+
+                <p>Manage your schedule and stay organized</p>
+
+            </div>
+
+            <div id="calendar"></div>
+
+        </div>
+
+    </div>
+
+    <!-- Event Modal -->
+
+    <div
+        id="eventModal"
+        class="modal"
+    >
+
+        <div class="modal-box">
+
+            <h2 id="modalTitle">Add Item</h2>
+
+            <input
+                id="eventTitle"
+                placeholder="Title"
+            >
+
+            <select id="eventType">
+
+                <option value="event">Event</option>
+
+                <option value="note">Note</option>
+
+                <option value="reminder">Reminder</option>
+
+                <option value="deadline">Deadline</option>
+
+            </select>
+
+            <input
+                type="date"
+                id="eventDate"
+            >
+
+            <input
+                id="eventDescription"
+                placeholder="Description"
+            >
+
+            <div class="modal-actions">
+
+                <button
+                    id="saveBtn"
+                    onclick="saveEvent()"
+                >
+                    Save
+                </button>
+
+                <button
+                    id="updateBtn"
+                    onclick="updateEvent()"
+                    style="display:none;"
+                >
+                    Update
+                </button>
+
+                <button
+                    id="deleteBtn"
+                    onclick="deleteEvent()"
+                    style="display:none;"
+                >
+                    Delete
+                </button>
+
+                <button
+                    class="cancel-btn"
+                    onclick="closeModal()"
+                >
+                    Cancel
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        const existingEvents = {{ events | tojson }};
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+
+    <script src="{{ url_for(
+        'static',
+        filename='js/calendar.js'
+    ) }}"></script>
+
+</body>
+</html>

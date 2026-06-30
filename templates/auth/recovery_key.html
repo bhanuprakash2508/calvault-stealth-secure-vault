@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+        Recovery Key
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+          'static',
+          filename='css/style.css'
+    ) }}">
+
+</head>
+
+<body>
+
+<div class="vault-auth-container">
+
+    <div class="vault-card">
+
+        <h1>
+
+            Recovery Key
+
+        </h1>
+
+        <p>
+
+            Save this key safely.
+
+            If you forget password or pattern,
+            this is the ONLY recovery method.
+
+        </p>
+
+        <div class="recovery-box">
+
+            {{ recovery_key }}
+
+        </div>
+
+        <button
+            onclick="location.href='/'"
+        >
+
+            Continue
+
+        </button>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+
+        Security Activity
+        
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+          'static',
+          filename='css/style.css'
+    ) }}">
+
+</head>
+
+<body>
+
+<div class="vault-container">
+
+    <div class="vault-header">
+
+        <h1>
+
+            Security Activity
+
+        </h1>
+
+        <div class="activity-buttons">
+
+    <button
+        onclick="location.href='/vault'"
+    >
+        ← Back
+    </button>
+
+        <form
+            method="POST"
+            action="/clear-activity"
+        >
+            <button>
+
+                🗑 Clear History
+
+            </button>
+        </form>
+
+    </div>
+
+    </div>
+
+
+    <div class="activity-list">
+
+        {% for log in logs %}
+
+        <div class="activity-card">
+
+            <div class="activity-action">
+
+                {{ log.action }}
+
+            </div>
+
+
+            <div class="activity-time">
+
+                {{ log.timestamp.strftime('%d %b %Y • %I:%M %p') }}
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

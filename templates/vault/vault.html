@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        CalVault Secure Vault
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+          'static',
+          filename='css/style.css'
+    ) }}">
+
+</head>
+
+<body>
+
+<div class="vault-container">
+
+    <div class="vault-header">
+
+        <h1>
+            CalVault Secure Vault
+        </h1>
+
+        <p>
+            Hidden Encrypted Storage
+        </p>
+
+        <div class="vault-status">
+
+            Vault Status : Secured • Encryption Active
+
+        </div>
+
+    </div>
+
+
+    <div class="vault-grid">
+
+        <div class="dashboard-card">
+
+            <h2>🔐 Password Manager</h2>
+
+            <p>
+                Stored Passwords
+            </p>
+
+            <h3>
+                {{ passwords_count }}
+            </h3>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+            <h2>📁 File Vault</h2>
+
+            <p>
+                Encrypted Files
+            </p>
+
+            <h3>
+                {{ files_count }}
+            </h3>
+
+        </div>
+
+    </div>
+
+
+    <div class="vault-actions">
+
+        <button
+            onclick="location.href='/password-vault'"
+        >
+
+            🔑 Password Vault
+
+        </button>
+
+
+        <button
+            onclick="location.href='/file-vault'"
+        >
+
+            📂 File Vault
+
+        </button>
+
+
+        <button
+            onclick="location.href='/export-backup'"
+        >
+
+            ⬇ Export Backup
+
+        </button>
+
+        <button
+            onclick="document.getElementById('restoreInput').click()"
+        >
+
+            ⬆ Restore Backup
+
+        </button>
+
+        <button
+            onclick="location.href='/settings'"
+        >
+            ⚙️ Settings
+        </button>
+
+
+        <form
+            id="restoreForm"
+            action="/restore-backup"
+            method="POST"
+            enctype="multipart/form-data"
+            style="display:none;"
+        >
+
+            <input
+                id="restoreInput"
+                type="file"
+                name="backup_file"
+                onchange="document.getElementById('restoreForm').submit()"
+            >
+
+        </form>
+
+
+        <button
+
+        onclick="location.href='/delete-account'"
+
+        >
+
+        💥 Destroy Vault
+
+        </button>
+
+        <button
+            onclick="location.href='/activity-log'"
+        >
+
+            📜 Activity Log
+
+        </button>
+
+        <button
+            onclick="location.href='/'"
+        >
+
+            🚪 Exit Vault
+
+        </button>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for(
+
+    'static',
+
+    filename='js/auto_lock.js'
+
+) }}"></script>
+
+</body>
+</html>

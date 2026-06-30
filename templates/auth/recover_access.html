@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+        Recover Access
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+          'static',
+          filename='css/style.css'
+    ) }}">
+
+</head>
+
+<body>
+
+
+<div class="vault-auth-container">
+
+    <div class="vault-card">
+
+        <h1>
+
+            Recovery Access 🔑
+
+        </h1>
+
+        <p>
+
+            Enter your recovery key to restore vault access
+
+        </p>
+
+        <form method="POST">
+
+            {% if error %}
+
+            <div class="error-message">
+
+                {{ error }}
+
+            </div>
+
+            {% endif %}
+
+            <input
+                type="text"
+                name="recovery_key"
+                placeholder="Enter Recovery Key"
+                required
+            >
+
+            <button type="submit">
+
+                Verify Recovery Key
+
+            </button>
+
+            <button
+                type="button"
+                class="cancel-btn"
+                onclick="location.href='/'"
+            >
+
+                Cancel
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

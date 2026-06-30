@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+
+        Delete Account
+
+    </title>
+
+    <link rel="stylesheet"
+        href="{{ url_for(
+        'static',
+        filename='css/style.css'
+    ) }}">
+
+</head>
+
+<body>
+
+<div class="delete-container">
+
+    <div class="delete-card">
+
+        <h1>
+
+            Delete Account
+
+        </h1>
+
+        <p>
+
+            This action will permanently destroy your encrypted vault.
+
+        </p>
+
+        <p class="warning-text">
+
+            All passwords, files and backups will be lost forever.
+
+        </p>
+
+        <form method="POST">
+
+            {% if error %}
+
+            <div class="error-message">
+
+                {{ error }}
+
+            </div>
+
+            {% endif %}
+
+            <input
+                type="password"
+                name="vault_password"
+                placeholder="Confirm Vault Password"
+                required
+            >
+
+            <div class="delete-actions">
+
+                <button
+                    class="danger-btn"
+                >
+
+                    Permanently Delete
+
+                </button>
+
+                <button
+                    type="button"
+                    onclick="location.href='/vault'"
+                    class="back-btn"
+                >
+
+                    Cancel
+                    
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

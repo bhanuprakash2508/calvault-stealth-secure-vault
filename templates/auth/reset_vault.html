@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+    Reset Vault
+</title>
+
+<link rel="stylesheet"
+      href="{{ url_for(
+      'static',
+      filename='css/style.css'
+) }}">
+
+</head>
+
+<body>
+
+<div class="vault-auth-container">
+
+<div class="vault-card">
+
+    <h1>
+
+        Reset Vault ⚠
+
+    </h1>
+
+    <p>
+
+        Enter vault password to permanently reset vault
+
+    </p>
+
+    {% if error %}
+
+    <div class="error-message">
+
+    {{ error }}
+
+    </div>
+
+    {% endif %}
+
+    <form method="POST">
+
+        <input
+            type="password"
+            name="vault_password"
+            placeholder="Confirm Vault Password"
+            required
+        >
+
+
+        <button>
+
+            Reset Vault
+
+        </button>
+
+
+        <button
+            type="button"
+            class="cancel-btn"
+            onclick="location.href='/settings'"
+        >
+
+            Cancel
+
+        </button>
+
+    </form>
+
+</div>
+
+</div>
+
+</body>
+</html>

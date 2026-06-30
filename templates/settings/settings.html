@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+        ⚙️ Settings
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+          'static',
+          filename='css/style.css'
+    ) }}">
+
+</head>
+
+<body>
+
+<div class="vault-container">
+
+    <div class="vault-header">
+
+        <h1>
+
+           ⚙️ Vault Settings
+
+        </h1>
+
+        <button
+            onclick="location.href='/vault'"
+        >
+            ← Back
+        </button>
+
+    </div>
+
+
+    <div class="settings-grid">
+
+        <button
+            onclick="location.href='/change-password'"
+        >
+
+            Change Vault Password
+
+        </button>
+
+
+        <button
+            onclick="location.href='/change-pattern'"
+        >
+
+            Change Secret Pattern
+
+        </button>
+
+
+        <button
+            onclick="location.href='/reset-vault'"
+            class="danger-btn"
+        >
+
+            Reset Vault
+
+        </button>
+
+    </div>
+
+</div>
+
+</body>
+</html>

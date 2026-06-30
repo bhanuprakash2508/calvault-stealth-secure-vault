@@ -1,0 +1,13 @@
+**pycache**/
+instance/
+uploads/
+.env
+
+*.db
+*.enc
+*.pyc
+
+.vscode/
+.idea/
+
+*.log

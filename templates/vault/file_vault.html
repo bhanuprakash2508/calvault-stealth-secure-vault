@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>File Vault</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/style.css'
+        ) }}"
+    >
+
+</head>
+
+<body>
+
+    <div class="vault-container">
+
+        <div class="vault-header">
+
+            <h1>Secure File Vault</h1>
+
+            <button onclick="location.href='/vault'">← Back</button>
+
+        </div>
+
+        <!-- Upload -->
+
+        <div class="upload-box">
+
+            <form
+                method="POST"
+                action="/upload-file"
+                enctype="multipart/form-data"
+            >
+
+                <input
+                    type="file"
+                    name="file"
+                    required
+                >
+
+                <button>Upload Secure File</button>
+
+            </form>
+
+        </div>
+
+        <!-- File Grid -->
+
+        <div class="file-grid">
+
+            {% for file in files %}
+
+            {% set ext =
+                file.original_filename.split('.')[-1].upper()
+            %}
+
+            <div class="file-card">
+
+                <div class="file-preview">
+
+                    {% if ext == "PDF" %}
+
+                        📕
+
+                    {% elif ext == "PNG"
+                         or ext == "JPG"
+                         or ext == "JPEG" %}
+
+                        🖼️
+
+                    {% elif ext == "ZIP" %}
+
+                        📦
+
+                    {% elif ext == "TXT" %}
+
+                        📄
+
+                    {% elif ext == "DOCX" %}
+
+                        📘
+
+                    {% else %}
+
+                        📁
+
+                    {% endif %}
+
+                </div>
+
+                <div class="file-bottom">
+
+                    <div class="file-info">
+
+                        <h3>{{ file.original_filename }}</h3>
+
+                        <span>{{ ext }}</span>
+
+                    </div>
+
+                    <div class="file-actions">
+
+                        <button
+                            onclick="window.open('/preview-file/{{ file.id }}')"
+                        >
+                            👁
+                        </button>
+
+                        <button
+                            onclick="location.href='/download-file/{{ file.id }}'"
+                        >
+                            ⬇
+                        </button>
+
+                        <form
+                            method="POST"
+                            action="/delete-file/{{ file.id }}"
+                        >
+
+                            <button>🗑</button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    <div class="pagination">
+
+        {% if pagination.has_prev %}
+
+            <button
+                onclick="location.href='?page={{ pagination.prev_num }}'"
+            >
+
+                ← Prev
+
+            </button>
+
+        {% endif %}
+
+        <span>
+
+            Page {{ pagination.page }}
+
+            of
+
+            {{ pagination.pages }}
+
+        </span>
+
+        {% if pagination.has_next %}
+
+            <button
+                onclick="location.href='?page={{ pagination.next_num }}'"
+            >
+
+                Next →
+
+            </button>
+
+        {% endif %}
+
+    </div>
+
+<script src="{{ url_for(
+
+    'static',
+
+    filename='js/auto_lock.js'
+
+) }}"></script>
+
+</body>
+</html>
