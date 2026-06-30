@@ -1,13 +1,26 @@
-**pycache**/
-instance/
-uploads/
+# Environment
 .env
 
+# Database files
 *.db
-*.enc
+
+# Keep folders but ignore contents
+uploads/*
+!uploads/.gitkeep
+
+instance/*
+!instance/.gitkeep
+
+# Python cache
+__pycache__/
 *.pyc
 
-.vscode/
-.idea/
+# Virtual environment
+venv/
+env/
 
-*.log
+# IDE
+.vscode/
+
+# OS
+.DS_Store
