@@ -1,6 +1,11 @@
 # 🔐 CalVault — Stealth Based Secure Vault System
 
-<img src="screenshots/banner.png" width="1000">
+![Python](https://img.shields.io/badge/Python-3.x-blue)
+![Flask](https://img.shields.io/badge/Flask-WebApp-black)
+![SQLite](https://img.shields.io/badge/Database-SQLite-green)
+![Security](https://img.shields.io/badge/Focus-Cybersecurity-red)
+
+<img src="screenshots/calendar_planner.png" width="900">
 
 **CalVault** is a privacy-focused secure vault application disguised as a normal planner/calendar application. Unlike traditional password managers or vault systems, CalVault hides sensitive data behind a stealth-based authentication mechanism, ensuring the vault remains invisible to casual observers.
 
@@ -630,11 +635,9 @@ Planned future upgrades:
 
 B.Tech — Computer Science Engineering (AI & ML)
 
-GitHub
-[GitHub Profile](https://github.com/bhanuprakash2508)
+🔗 GitHub: [bhanuprakash2508](https://github.com/bhanuprakash2508)
 
-LinkedIn
-[LinkedIn Profile](https://www.linkedin.com/in/bhanuprakash-chintha)
+🔗 LinkedIn: [Bhanu Prakash Chintha](https://www.linkedin.com/in/bhanuprakash-chintha/)
 
 ---
 ## Project Status
