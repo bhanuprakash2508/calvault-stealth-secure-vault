@@ -9,14 +9,14 @@ KEY = os.getenv(
     "ENCRYPTION_KEY"
 )
 
-if not KEY:
+if KEY is None:
 
     raise ValueError(
-        "ENCRYPTION_KEY not found in .env file"
+        "ENCRYPTION_KEY is missing"
     )
 
 CIPHER = Fernet(
-    KEY.encode()
+    KEY.encode("utf-8")
 )
 
 # Text Encryption
